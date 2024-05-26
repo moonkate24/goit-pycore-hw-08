@@ -48,11 +48,15 @@ class Record:
         for i, phone in enumerate(self.phones):
             if phone.value == old_phone:
                 self.phones[i] = Phone(new_phone)
-                break
+                return
+        raise ValueError(f"Old phone number {old_phone} not found.")
 
     def find_phone(self, phone):
-        return any(p.value == phone for p in self.phones)
-
+        for p in self.phones:
+            if p.value == phone:
+                return p
+        return None
+    
     def add_birthday(self, birthday):
         self.birthday = Birthday(birthday)
 
